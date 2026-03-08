@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fura – Phytothérapie & Botanique Médicinale</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-deep: #1a2e1a;
+      --green-mid: #2d5a27;
+      --green-sage: #6b8f6b;
+      --green-light: #a8c5a0;
+      --cream: #f5f0e8;
+      --cream-dark: #ede5d5;
+      --gold: #c9a84c;
+      --text-dark: #1a2010;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(245, 240, 232, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(107,143,107,0.2);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--green-deep) 0%, #243d1e 50%, #1e3518 100%);
+      padding: 8rem 3rem 5rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(ellipse at 20% 50%, rgba(168,197,160,0.12) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 50%);
+    }
+    .hero-botanical {
+      position: absolute;
+      font-size: 18rem;
+      opacity: 0.04;
+      right: -2rem; top: 50%;
+      transform: translateY(-50%);
+      line-height: 1;
+      user-select: none;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; max-width: 780px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      border: 1px solid rgba(168,197,160,0.4);
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green-light);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(245,240,232,0.7);
+      max-width: 540px; margin: 0 auto 2.5rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--green-deep);
+      padding: 0.9rem 2.2rem;
+      border-radius: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+    .btn-secondary {
+      border: 1px solid rgba(168,197,160,0.5);
+      color: var(--green-light);
+      padding: 0.9rem 2.2rem;
+      border-radius: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(168,197,160,0.1); }
+
+    /* FEATURES */
+    .section { padding: 6rem 3rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--green-sage); font-weight: 500; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400; line-height: 1.2;
+      color: var(--green-deep); margin-bottom: 3.5rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: white;
+      border: 1px solid var(--cream-dark);
+      border-radius: 0.5rem;
+      padding: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,46,26,0.08); }
+    .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .feature-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--green-deep); margin-bottom: 0.6rem;
+    }
+    .feature-card p { font-size: 0.9rem; line-height: 1.6; color: #555; font-weight: 300; }
+
+    /* PREMIUM */
+    .premium-section {
+      background: var(--green-deep);
+      color: var(--cream);
+    }
+    .premium-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .premium-label { color: var(--green-light); }
+    .premium-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300; line-height: 1.2;
+      color: var(--cream); margin-bottom: 1.5rem;
+    }
+    .premium-title em { font-style: italic; color: var(--gold); }
+    .premium-desc { font-size: 0.95rem; line-height: 1.7; color: rgba(245,240,232,0.65); font-weight: 300; margin-bottom: 2rem; }
+    .perks { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .perks li {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.9rem; color: rgba(245,240,232,0.8);
+    }
+    .perks li::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
+    .pricing-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(168,197,160,0.2);
+      border-radius: 0.5rem;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .pricing-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green-light); margin-bottom: 2rem;
+    }
+    .price-option {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(168,197,160,0.15);
+      border-radius: 0.4rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .price-option.featured {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+    .price-badge {
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.5rem;
+    }
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300; color: var(--cream);
+    }
+    .price-amount span { font-size: 1rem; font-weight: 300; vertical-align: super; }
+    .price-period { font-size: 0.8rem; color: rgba(245,240,232,0.4); margin-top: 0.2rem; }
+    .pricing-note { font-size: 0.75rem; color: rgba(245,240,232,0.4); margin-top: 1.5rem; line-height: 1.6; }
+
+    /* FREE VERSION */
+    .freemium-section { background: var(--cream-dark); }
+    .freemium-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-top: 2rem;
+    }
+    .freemium-item {
+      background: white; border-radius: 0.4rem; padding: 1.5rem;
+      border-left: 3px solid var(--green-sage);
+    }
+    .freemium-item h4 { font-size: 0.9rem; font-weight: 500; color: var(--green-deep); margin-bottom: 0.3rem; }
+    .freemium-item p { font-size: 0.8rem; color: #666; font-weight: 300; }
+
+    /* LEGAL SECTIONS */
+    .legal-section { background: white; }
+    .legal-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--cream-dark); margin-bottom: 2rem; flex-wrap: wrap; }
+    .legal-tab {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      color: var(--green-sage);
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .legal-tab.active { color: var(--green-deep); border-bottom-color: var(--green-mid); }
+    .legal-content { display: none; }
+    .legal-content.active { display: block; }
+    .legal-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--green-deep); margin: 1.5rem 0 0.5rem;
+    }
+    .legal-content h3:first-child { margin-top: 0; }
+    .legal-content p, .legal-content li {
+      font-size: 0.85rem; line-height: 1.7; color: #444; font-weight: 300; margin-bottom: 0.5rem;
+    }
+    .legal-content ul { padding-left: 1.2rem; }
+    .legal-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.82rem; }
+    .legal-content th { background: var(--cream); padding: 0.7rem 1rem; text-align: left; font-weight: 500; color: var(--green-deep); }
+    .legal-content td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--cream-dark); color: #444; font-weight: 300; }
+
+    /* CONTACT */
+    .contact-section { background: var(--cream-dark); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    .contact-card {
+      background: white; border-radius: 0.5rem; padding: 2rem;
+      border: 1px solid rgba(107,143,107,0.15);
+    }
+    .contact-card .icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+    .contact-card h4 { font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-sage); margin-bottom: 0.4rem; }
+    .contact-card p { font-size: 0.9rem; color: var(--green-deep); font-weight: 400; }
+    .contact-card a { color: var(--green-mid); text-decoration: none; }
+    .contact-card a:hover { color: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      background: var(--green-deep);
+      color: rgba(245,240,232,0.5);
+      text-align: center;
+      padding: 2rem 3rem;
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+    footer strong { color: var(--green-light); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 4rem; }
+      .section { padding: 4rem 1.5rem; }
+      .premium-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Fura</div>
+  <ul class="nav-links">
+    <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+    <li><a href="#premium">Premium</a></li>
+    <li><a href="#legal">Légal</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-botanical">🌿</div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Application Android · Éducation & Botanique</span>
+    <h1>La nature <em>médicinale</em><br/>à portée de main</h1>
+    <p class="hero-desc">
+      Fura est votre compagnon de phytothérapie : explorez un catalogue complet de plantes médicinales, planifiez votre jardin, apprenez en jouant et partagez vos découvertes.
+    </p>
+    <div class="hero-cta">
+      <a href="#premium" class="btn-primary">Découvrir Premium</a>
+      <a href="#fonctionnalites" class="btn-secondary">En savoir plus</a>
+    </div>
+  </div>
+</section>
+
+<!-- FONCTIONNALITÉS -->
+<section class="section" id="fonctionnalites">
+  <div class="section-inner">
+    <p class="section-label">Ce que propose Fura</p>
+    <h2 class="section-title">Une expérience botanique<br/>complète et éducative</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌱</div>
+        <h3>Catalogue de plantes</h3>
+        <p>Fiches descriptives détaillées sur les propriétés, usages et précautions de chaque plante médicinale.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Calendrier de récolte</h3>
+        <p>Conseils saisonniers personnalisés pour récolter chaque plante au bon moment de l'année.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏡</div>
+        <h3>Planificateur de jardin</h3>
+        <p>Créez et organisez votre jardin médicinal virtuel avec jusqu'à 27 emplacements en version Premium.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧪</div>
+        <h3>Guide de recettes</h3>
+        <p>Préparations et remèdes naturels à base de plantes, partagés au sein de la communauté Fura.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3>Mini-jeux éducatifs</h3>
+        <p>Apprenez la botanique médicinale de façon ludique grâce à des jeux interactifs et un système de progression.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Fonctionnalités sociales</h3>
+        <p>Ajoutez des amis, lancez des défis botaniques et partagez vos recettes de potions préférées.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERSION GRATUITE -->
+<section class="section freemium-section">
+  <div class="section-inner">
+    <p class="section-label">Accès gratuit</p>
+    <h2 class="section-title">Commencez gratuitement,<br/>sans engagement</h2>
+    <p style="font-size:0.95rem; color:#555; font-weight:300; max-width:600px; line-height:1.7;">
+      La version gratuite de Fura donne accès à l'essentiel : catalogues, calendrier, mini-jeux et fonctionnalités sociales de base. Aucune carte bancaire requise.
+    </p>
+    <div class="freemium-grid">
+      <div class="freemium-item">
+        <h4>Catalogue complet</h4>
+        <p>Accès à toutes les fiches plantes</p>
+      </div>
+      <div class="freemium-item">
+        <h4>Calendrier de récolte</h4>
+        <p>Conseils saisonniers inclus</p>
+      </div>
+      <div class="freemium-item">
+        <h4>Mini-jeux</h4>
+        <p>Avec publicités entre les parties</p>
+      </div>
+      <div class="freemium-item">
+        <h4>Jardin limité</h4>
+        <p>Nombre de cases selon progression</p>
+      </div>
+      <div class="freemium-item">
+        <h4>Fonctions sociales</h4>
+        <p>Amis et défis de base</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM -->
+<section class="section premium-section" id="premium">
+  <div class="premium-inner">
+    <div>
+      <p class="section-label premium-label">Abonnement Premium</p>
+      <h2 class="premium-title">L'expérience Fura<br/><em>sans limites</em></h2>
+      <p class="premium-desc">
+        Débloquez l'intégralité des fonctionnalités : jardin complet, mini-jeux illimités sans publicité, toutes les recettes et le plein potentiel des fonctionnalités sociales.
+      </p>
+      <ul class="perks">
+        <li>Zéro publicité, expérience immersive</li>
+        <li>Jardin médicinal complet — 27 cases</li>
+        <li>Accès illimité à tous les mini-jeux</li>
+        <li>Toutes les fonctionnalités sociales avancées</li>
+        <li>Mises à jour et nouvelles plantes en priorité</li>
+        <li>Support client prioritaire</li>
+      </ul>
+    </div>
+    <div class="pricing-card">
+      <h3>Choisissez votre formule</h3>
+      <div class="price-option">
+        <div class="price-badge">Mensuel</div>
+        <div class="price-amount"><span>€</span>4<span style="font-size:1.2rem">,99</span></div>
+        <div class="price-period">par mois · résiliable à tout moment</div>
+      </div>
+      <div class="price-option featured">
+        <div class="price-badge">Annuel · Meilleure offre</div>
+        <div class="price-amount"><span>€</span>39<span style="font-size:1.2rem">,99</span></div>
+        <div class="price-period">par an · soit ~3,33 €/mois</div>
+      </div>
+      <p class="pricing-note">
+        Paiement sécurisé via Stripe. Tacite reconduction mensuelle ou annuelle. Résiliation possible à tout moment depuis votre espace abonné ou en écrivant à jogolinga@gmail.com.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LÉGAL -->
+<section class="section legal-section" id="legal">
+  <div class="section-inner">
+    <p class="section-label">Documents légaux</p>
+    <h2 class="section-title">Conditions d'utilisation<br/>& Politique de confidentialité</h2>
+
+    <div class="legal-tabs">
+      <div class="legal-tab active" onclick="showTab('cgu')">Conditions générales</div>
+      <div class="legal-tab" onclick="showTab('privacy')">Confidentialité & RGPD</div>
+      <div class="legal-tab" onclick="showTab('refund')">Remboursement</div>
+    </div>
+
+    <!-- CGU -->
+    <div class="legal-content active" id="tab-cgu">
+      <h3>1. Objet</h3>
+      <p>Fura est une application Android dédiée à la phytothérapie et à la botanique médicinale, éditée par <strong>Fura SAS</strong>, . L'utilisation de l'application implique l'acceptation des présentes CGU.</p>
+
+      <h3>2. Accès au service</h3>
+      <p>L'accès est ouvert à toute personne physique disposant de la capacité juridique. Les mineurs de moins de 16 ans doivent obtenir l'accord de leur représentant légal (art. 8 RGPD). Fura SAS s'efforce d'assurer la disponibilité 24h/24, 7j/7 sans garantir l'absence d'interruptions pour maintenance ou cas de force majeure.</p>
+
+      <h3>3. Modèle freemium & abonnement</h3>
+      <p>Fura propose une version gratuite avec accès au catalogue, au calendrier et aux mini-jeux (avec publicités), ainsi qu'un <strong>abonnement Premium</strong> (mensuel ou annuel) donnant accès sans restriction à toutes les fonctionnalités, dont la suppression des publicités, le jardin complet (27 cases) et les fonctionnalités sociales avancées. Le paiement est traité via Stripe, Inc. L'abonnement est à tacite reconduction et résiliable à tout moment.</p>
+
+      <h3>4. Droit de rétractation</h3>
+      <p>Conformément à l'art. L.221-28 du Code de la consommation, le droit de rétractation de 14 jours ne s'applique pas aux contenus numériques exécutés immédiatement après l'achat si l'utilisateur y a expressément renoncé lors de la souscription. En cas de désaccord, contactez-nous à <a href="mailto:jogolinga@gmail.com">jogolinga@gmail.com</a>.</p>
+
+      <h3>5. Obligations & propriété intellectuelle</h3>
+      <p>L'utilisateur s'engage à utiliser l'application conformément aux lois en vigueur, sans tenter de décompiler, extraire ou redistribuer les contenus. L'ensemble des éléments de Fura (design, données botaniques, algorithmes) est la propriété exclusive de Fura SAS. Une licence d'utilisation personnelle, non exclusive et non cessible est accordée à l'utilisateur.</p>
+
+      <h3>6. Limitation de responsabilité</h3>
+      <p>L'application est fournie « en l'état ». Fura SAS ne saurait être tenu responsable d'une utilisation à des fins médicales sans consultation d'un professionnel de santé. L'application ne se substitue en aucun cas à un avis médical.</p>
+
+      <h3>7. Droit applicable</h3>
+      <p>Les présentes CGU sont soumises au droit français. Tout litige relève de la compétence du Tribunal de Commerce de Paris.</p>
+    </div>
+
+    <!-- PRIVACY -->
+    <div class="legal-content" id="tab-privacy">
+      <h3>Responsable du traitement</h3>
+      <p><strong>Fura SAS</strong> — Email : <a href="mailto:jogolinga@gmail.com">jogolinga@gmail.com</a></p>
+
+      <h3>Données collectées</h3>
+      <p><strong>Identification :</strong> adresse e-mail (via Google OAuth 2.0), pseudo, identifiant unique, photo de profil.<br/>
+      <strong>Progression :</strong> scores, plantes favorites, planning d'arrosage et jardins (stockage local).<br/>
+      <strong>Abonnement :</strong> statut et date d'expiration. Les données bancaires sont gérées exclusivement par Stripe — Fura SAS ne stocke aucune donnée de paiement.<br/>
+      <strong>Social :</strong> liste d'amis, défis, recettes partagées.</p>
+
+      <h3>Bases légales (RGPD)</h3>
+      <table>
+        <tr><th>Finalité</th><th>Base légale</th></tr>
+        <tr><td>Gestion du compte & fourniture du service</td><td>Exécution du contrat (art. 6.1.b)</td></tr>
+        <tr><td>Facturation Premium</td><td>Exécution du contrat (art. 6.1.b)</td></tr>
+        <tr><td>Fonctionnalités sociales</td><td>Consentement (art. 6.1.a)</td></tr>
+        <tr><td>Statistiques agrégées</td><td>Intérêt légitime (art. 6.1.f)</td></tr>
+      </table>
+
+      <h3>Sous-traitants</h3>
+      <p>Supabase Inc. (hébergement), Google LLC (authentification OAuth), Stripe Inc. (paiements), Vercel Inc. (web). Aucune donnée n'est vendue à des tiers. Les transferts hors UE sont encadrés par les Clauses Contractuelles Types (CCT) ou le mécanisme EU-U.S. Data Privacy Framework.</p>
+
+      <h3>Vos droits</h3>
+      <p>Accès, rectification, effacement, portabilité, opposition et limitation du traitement (RGPD art. 15–21). Exercez vos droits à <a href="mailto:jogolinga@gmail.com">jogolinga@gmail.com</a>. Réponse sous 1 mois. Vous pouvez également saisir la <a href="https://www.cnil.fr" target="_blank">CNIL</a>.</p>
+
+      <h3>Stockage local</h3>
+      <p>Les données de progression (scores, favoris, jardin, préférences) sont stockées localement sur votre appareil et ne sont pas transmises à nos serveurs. Aucun cookie publicitaire tiers n'est utilisé.</p>
+    </div>
+
+    <!-- REFUND -->
+    <div class="legal-content" id="tab-refund">
+      <h3>Politique de remboursement</h3>
+      <p>L'abonnement Premium Fura est souscrit pour une période mensuelle ou annuelle avec tacite reconduction. Vous pouvez résilier à tout moment depuis votre espace abonné ou en écrivant à <a href="mailto:jogolinga@gmail.com">jogolinga@gmail.com</a> ; la résiliation prend effet à l'issue de la période en cours sans remboursement proratisé.</p>
+
+      <h3>Droit de rétractation</h3>
+      <p>Conformément à l'article L.221-28 du Code de la consommation, le droit légal de rétractation de 14 jours ne s'applique pas aux contenus numériques dont l'exécution a démarré immédiatement après la souscription et pour lesquels l'utilisateur a expressément renoncé à ce droit.</p>
+
+      <h3>Exception & bonne foi</h3>
+      <p>Néanmoins, si vous rencontrez un problème technique empêchant l'accès aux fonctionnalités Premium dans les 48h suivant votre souscription, nous nous engageons à examiner votre demande de remboursement avec bienveillance. Contactez-nous à <a href="mailto:jogolinga@gmail.com">jogolinga@gmail.com</a> en décrivant le problème rencontré.</p>
+
+      <h3>Médiation</h3>
+      <p>En cas de litige non résolu, vous pouvez recourir gratuitement à un médiateur de la consommation (art. L.611-1 du Code de la consommation) en nous contactant d'abord à <a href="mailto:jogolinga@gmail.com">jogolinga@gmail.com</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <p class="section-label">Nous contacter</p>
+    <h2 class="section-title">Une question ?<br/>Nous sommes là.</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="icon">📧</div>
+        <h4>Email</h4>
+        <p><a href="mailto:jogolinga@gmail.com">jogolinga@gmail.com</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">🏢</div>
+        <h4>Siège social</h4>
+        <p>Fura SAS</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">⚖️</div>
+        <h4>Éditeur</h4>
+        <p>Fura SAS<br/>Entreprise française</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">🔒</div>
+        <h4>Paiements</h4>
+        <p>Sécurisés via<br/><strong>Stripe, Inc.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Fura SAS</strong> · <a href="mailto:jogolinga@gmail.com" style="color:var(--green-light)">jogolinga@gmail.com</a><br/>
+  © 2026 Fura SAS · Tous droits réservés · Dernière mise à jour : février 2026<br/>
+  <span style="font-size:0.75rem; opacity:0.6;">L'application Fura ne se substitue pas à une consultation médicale. Consultez un professionnel de santé avant tout usage thérapeutique.</span>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.legal-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.legal-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
